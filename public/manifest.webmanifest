@@ -1,0 +1,15 @@
+{
+  "name": "Suhail Personal AI",
+  "short_name": "Suhail AI",
+  "description": "AI-powered study companion for B.Tech CSE (AI & ML) — by Suhail Ali.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0a0014",
+  "theme_color": "#8b5cf6",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

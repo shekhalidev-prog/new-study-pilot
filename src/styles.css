@@ -1,0 +1,139 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-neon: var(--neon);
+  --color-neon-2: var(--neon-2);
+
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --radius: 1rem;
+
+  /* Deep space background */
+  --background: oklch(0.14 0.03 285);
+  --foreground: oklch(0.97 0.01 285);
+
+  --card: oklch(0.18 0.03 285 / 55%);
+  --card-foreground: oklch(0.97 0.01 285);
+  --popover: oklch(0.16 0.03 285);
+  --popover-foreground: oklch(0.97 0.01 285);
+
+  /* Neon violet / pink */
+  --primary: oklch(0.68 0.24 305);
+  --primary-foreground: oklch(0.14 0.03 285);
+  --neon: oklch(0.72 0.25 305);          /* #A855F7-ish */
+  --neon-2: oklch(0.72 0.24 355);        /* #EC4899-ish */
+
+  --secondary: oklch(0.24 0.04 285 / 60%);
+  --secondary-foreground: oklch(0.97 0.01 285);
+  --muted: oklch(0.22 0.03 285 / 60%);
+  --muted-foreground: oklch(0.72 0.03 285);
+  --accent: oklch(0.28 0.08 315 / 70%);
+  --accent-foreground: oklch(0.97 0.01 285);
+  --destructive: oklch(0.65 0.24 25);
+  --destructive-foreground: oklch(0.98 0 0);
+
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.72 0.25 305);
+
+  --gradient-neon: linear-gradient(135deg, var(--neon), var(--neon-2));
+  --gradient-glow: radial-gradient(circle at 20% 10%, oklch(0.35 0.18 305 / 55%), transparent 60%),
+                   radial-gradient(circle at 80% 30%, oklch(0.35 0.18 355 / 45%), transparent 60%),
+                   radial-gradient(circle at 50% 90%, oklch(0.30 0.18 260 / 45%), transparent 60%);
+  --shadow-neon: 0 0 40px -8px oklch(0.72 0.25 305 / 55%);
+  --shadow-glass: 0 8px 32px 0 oklch(0 0 0 / 45%);
+}
+
+.dark { color-scheme: dark; }
+
+@layer base {
+  * { border-color: var(--color-border); }
+
+  html { color-scheme: dark; }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    background-image: var(--gradient-glow);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.02em; }
+}
+
+@utility glass {
+  background-color: oklch(1 0 0 / 5%);
+  backdrop-filter: blur(20px) saturate(150%);
+  border: 1px solid oklch(1 0 0 / 10%);
+  box-shadow: var(--shadow-glass);
+}
+
+@utility glass-strong {
+  background-color: oklch(0.18 0.03 285 / 65%);
+  backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid oklch(1 0 0 / 12%);
+  box-shadow: var(--shadow-glass);
+}
+
+@utility text-gradient {
+  background: var(--gradient-neon);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility neon-border {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(var(--card), var(--card)) padding-box,
+    var(--gradient-neon) border-box;
+}
+
+@utility neon-glow { box-shadow: var(--shadow-neon); }
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-20px) translateX(10px); }
+}
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.05); }
+}
+@utility animate-float { animation: float-slow 8s ease-in-out infinite; }
+@utility animate-pulse-glow { animation: pulse-glow 4s ease-in-out infinite; }
