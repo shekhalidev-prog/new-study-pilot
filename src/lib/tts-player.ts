@@ -6,6 +6,8 @@ export type TTSHandle = {
   done: Promise<void>;
   amplitude: () => number; // 0..1
   isSpeaking: () => boolean;
+  /** True if the audio request failed (not merely stopped), so callers can fall back to another voice. */
+  failed: () => boolean;
 };
 
 export async function speak(text: string, opts: { speed?: number; voice?: string } = {}): Promise<TTSHandle> {
@@ -23,6 +25,7 @@ export async function speak(text: string, opts: { speed?: number; voice?: string
   let pending = new Uint8Array(0);
   let stopped = false;
   let speaking = true;
+  let failed = false;
   const abort = new AbortController();
   const sources: AudioBufferSourceNode[] = [];
 
@@ -88,6 +91,7 @@ export async function speak(text: string, opts: { speed?: number; voice?: string
       await new Promise((r) => setTimeout(r, wait + 100));
     } catch {
       /* aborted or network */
+      if (!stopped) failed = true;
     } finally {
       speaking = false;
       try { await ctx.close(); } catch { /* noop */ }
@@ -115,5 +119,6 @@ export async function speak(text: string, opts: { speed?: number; voice?: string
       return Math.min(1, rms * 3);
     },
     isSpeaking: () => speaking,
+    failed: () => failed,
   };
 }

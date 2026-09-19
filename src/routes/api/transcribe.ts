@@ -1,11 +1,21 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { checkRateLimit, getClientIdFromRequest } from "@/lib/rate-limit.server";
+import { NoSttProviderError, transcribeWithFallback } from "@/lib/stt-fallback.server";
 
 export const Route = createFileRoute("/api/transcribe")({
   server: {
     handlers: {
       POST: async ({ request }) => {
-        const key = process.env.LOVABLE_API_KEY;
-        if (!key) return new Response("Missing LOVABLE_API_KEY", { status: 500 });
+        const rl = checkRateLimit(`transcribe:${getClientIdFromRequest(request)}`, {
+          windowMs: 60_000,
+          max: 40,
+        });
+        if (!rl.allowed) {
+          return new Response("Too many recordings too quickly. Please wait a moment.", {
+            status: 429,
+            headers: { "Retry-After": String(Math.ceil(rl.retryAfterMs / 1000)) },
+          });
+        }
 
         const form = await request.formData();
         const file = form.get("file");
@@ -16,33 +26,20 @@ export const Route = createFileRoute("/api/transcribe")({
           return new Response("Recording too short — try again.", { status: 400 });
         }
 
-        const mime = file.type.split(";")[0];
-        const extMap: Record<string, string> = {
-          "audio/webm": "webm",
-          "audio/mp4": "mp4",
-          "audio/mpeg": "mp3",
-          "audio/wav": "wav",
-          "audio/ogg": "ogg",
-        };
-        const ext = extMap[mime] ?? "webm";
-
-        const upstream = new FormData();
-        upstream.append("model", "openai/gpt-4o-mini-transcribe");
-        upstream.append("file", file, `recording.${ext}`);
-
-        const res = await fetch("https://ai.gateway.lovable.dev/v1/audio/transcriptions", {
-          method: "POST",
-          headers: { Authorization: `Bearer ${key}` },
-          body: upstream,
-        });
-        if (!res.ok) {
-          const msg = await res.text().catch(() => "");
-          return new Response(msg || "Transcription failed", { status: res.status });
+        try {
+          const { text, provider } = await transcribeWithFallback(file);
+          return new Response(JSON.stringify({ text, provider }), {
+            headers: { "Content-Type": "application/json" },
+          });
+        } catch (err) {
+          if (err instanceof NoSttProviderError) {
+            return new Response(err.message, { status: 503 });
+          }
+          console.error("Transcription failed:", err);
+          return new Response("Transcription failed on every provider. Please try again.", {
+            status: 502,
+          });
         }
-        const data = (await res.json()) as { text?: string };
-        return new Response(JSON.stringify({ text: data.text ?? "" }), {
-          headers: { "Content-Type": "application/json" },
-        });
       },
     },
   },

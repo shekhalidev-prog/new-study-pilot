@@ -28,7 +28,7 @@ export const generateTopicContent = createServerFn({ method: "POST" })
     // Only rate-limit actual generations (cache hits are free and instant,
     // so they shouldn't count against a user's quota).
     try {
-      const request = getWebRequest();
+      const request = getRequest();
       if (request) {
         const clientId = getClientIdFromRequest(request);
         const rl = checkRateLimit(`topic:${clientId}`, { windowMs: 60_000, max: 15 });

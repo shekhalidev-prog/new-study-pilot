@@ -11,6 +11,9 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SuhailRouteImport } from './routes/suhail'
 import { Route as SubjectsRouteImport } from './routes/subjects'
+import { Route as RevisionRouteImport } from './routes/revision'
+import { Route as PlanRouteImport } from './routes/plan'
+import { Route as CloneRouteImport } from './routes/clone'
 import { Route as ChatRouteImport } from './routes/chat'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AboutRouteImport } from './routes/about'
@@ -31,6 +34,21 @@ const SuhailRoute = SuhailRouteImport.update({
 const SubjectsRoute = SubjectsRouteImport.update({
   id: '/subjects',
   path: '/subjects',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RevisionRoute = RevisionRouteImport.update({
+  id: '/revision',
+  path: '/revision',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlanRoute = PlanRouteImport.update({
+  id: '/plan',
+  path: '/plan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CloneRoute = CloneRouteImport.update({
+  id: '/clone',
+  path: '/clone',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ChatRoute = ChatRouteImport.update({
@@ -94,6 +112,9 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
   '/chat': typeof ChatRoute
+  '/clone': typeof CloneRoute
+  '/plan': typeof PlanRoute
+  '/revision': typeof RevisionRoute
   '/subjects': typeof SubjectsRouteWithChildren
   '/suhail': typeof SuhailRoute
   '/api/chat': typeof ApiChatRoute
@@ -109,6 +130,9 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
   '/chat': typeof ChatRoute
+  '/clone': typeof CloneRoute
+  '/plan': typeof PlanRoute
+  '/revision': typeof RevisionRoute
   '/suhail': typeof SuhailRoute
   '/api/chat': typeof ApiChatRoute
   '/api/speak': typeof ApiSpeakRoute
@@ -124,6 +148,9 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
   '/chat': typeof ChatRoute
+  '/clone': typeof CloneRoute
+  '/plan': typeof PlanRoute
+  '/revision': typeof RevisionRoute
   '/subjects': typeof SubjectsRouteWithChildren
   '/suhail': typeof SuhailRoute
   '/api/chat': typeof ApiChatRoute
@@ -141,6 +168,9 @@ export interface FileRouteTypes {
     | '/about'
     | '/admin'
     | '/chat'
+    | '/clone'
+    | '/plan'
+    | '/revision'
     | '/subjects'
     | '/suhail'
     | '/api/chat'
@@ -156,6 +186,9 @@ export interface FileRouteTypes {
     | '/about'
     | '/admin'
     | '/chat'
+    | '/clone'
+    | '/plan'
+    | '/revision'
     | '/suhail'
     | '/api/chat'
     | '/api/speak'
@@ -170,6 +203,9 @@ export interface FileRouteTypes {
     | '/about'
     | '/admin'
     | '/chat'
+    | '/clone'
+    | '/plan'
+    | '/revision'
     | '/subjects'
     | '/suhail'
     | '/api/chat'
@@ -186,6 +222,9 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   AdminRoute: typeof AdminRoute
   ChatRoute: typeof ChatRoute
+  CloneRoute: typeof CloneRoute
+  PlanRoute: typeof PlanRoute
+  RevisionRoute: typeof RevisionRoute
   SubjectsRoute: typeof SubjectsRouteWithChildren
   SuhailRoute: typeof SuhailRoute
   ApiChatRoute: typeof ApiChatRoute
@@ -209,6 +248,27 @@ declare module '@tanstack/react-router' {
       path: '/subjects'
       fullPath: '/subjects'
       preLoaderRoute: typeof SubjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/revision': {
+      id: '/revision'
+      path: '/revision'
+      fullPath: '/revision'
+      preLoaderRoute: typeof RevisionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/plan': {
+      id: '/plan'
+      path: '/plan'
+      fullPath: '/plan'
+      preLoaderRoute: typeof PlanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/clone': {
+      id: '/clone'
+      path: '/clone'
+      fullPath: '/clone'
+      preLoaderRoute: typeof CloneRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/chat': {
@@ -310,6 +370,9 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   AdminRoute: AdminRoute,
   ChatRoute: ChatRoute,
+  CloneRoute: CloneRoute,
+  PlanRoute: PlanRoute,
+  RevisionRoute: RevisionRoute,
   SubjectsRoute: SubjectsRouteWithChildren,
   SuhailRoute: SuhailRoute,
   ApiChatRoute: ApiChatRoute,

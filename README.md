@@ -74,6 +74,15 @@ Built with a modern component-based interface featuring:
 * Data visualizations
 * Accessible UI primitives
 
+### 🎓 Exam Prep Tools
+
+* **Smart Revision (`/revision`)** — pick a subject, chapter and time budget (5 / 15 / 30 / 60 min) and get an exam-focused revision sheet, a 10-question practice test with weak-topic tracking, and AI-predicted exam questions based on the PYQs saved in the admin panel.
+* **Mock Viva Simulator** — the AI examiner asks spoken viva questions, you answer with camera + mic, and get confidence / knowledge / fluency scores with per-question feedback. Voice transcription uses Groq Whisper first and falls back to Gemini (then the legacy gateway) automatically.
+* **Study Clone (`/clone`)** — paste or upload your own notes and get answers strictly from them (Hinglish + English), plus a one-click revision pack.
+* **Exam Plan (`/plan`)** — live exam countdown with an AI-generated hour-by-hour plan and day-wise roadmap.
+
+All of these run through the same multi-provider AI fallback chain (Groq → Gemini → NVIDIA → OpenRouter → Cerebras → OpenAI).
+
 ### ⚡ Fast Web Experience
 
 The application uses a modern Vite-based development stack for a fast development and production experience.
@@ -156,7 +165,7 @@ new-study-pilot/
 │
 ├── src/                    # Application source code
 │   ├── components/         # Reusable UI components
-│   ├── routes/             # Application routes
+│   ├── routes/             # Application routes (incl. /revision, /clone, /plan)
 │   ├── lib/                # Utilities and helpers
 │   └── ...
 │
