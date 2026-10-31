@@ -509,10 +509,4 @@ If this project helped you or inspired you, please consider **starring the repo*
 
 This project is shared for learning, experimentation and portfolio purposes.
 
-© 2026 **Suhail Ali**. All rights reserved.
-
-<div align="center">
-
-**Made with 💜 in India · Powered by AI**
-
-</div>
+© 2026 **Suhail Ali**

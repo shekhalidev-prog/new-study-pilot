@@ -9,56 +9,26 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SuhailRouteImport } from './routes/suhail'
-import { Route as SubjectsRouteImport } from './routes/subjects'
-import { Route as RevisionRouteImport } from './routes/revision'
-import { Route as PlanRouteImport } from './routes/plan'
-import { Route as CloneRouteImport } from './routes/clone'
-import { Route as ChatRouteImport } from './routes/chat'
-import { Route as AdminRouteImport } from './routes/admin'
-import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as ChatRouteImport } from './routes/chat'
+import { Route as CloneRouteImport } from './routes/clone'
+import { Route as PlanRouteImport } from './routes/plan'
+import { Route as RevisionRouteImport } from './routes/revision'
+import { Route as SubjectsRouteImport } from './routes/subjects'
+import { Route as SuhailRouteImport } from './routes/suhail'
+import { Route as ApiChatRouteImport } from './routes/api/chat'
+import { Route as ApiSpeakRouteImport } from './routes/api/speak'
+import { Route as ApiSuhailRouteImport } from './routes/api/suhail'
+import { Route as ApiTranscribeRouteImport } from './routes/api/transcribe'
 import { Route as SubjectsIndexRouteImport } from './routes/subjects.index'
 import { Route as SubjectsSlugRouteImport } from './routes/subjects.$slug'
-import { Route as ApiTranscribeRouteImport } from './routes/api/transcribe'
-import { Route as ApiSuhailRouteImport } from './routes/api/suhail'
-import { Route as ApiSpeakRouteImport } from './routes/api/speak'
-import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as TopicSubjectUnitTopicRouteImport } from './routes/topic.$subject.$unit.$topic'
 
-const SuhailRoute = SuhailRouteImport.update({
-  id: '/suhail',
-  path: '/suhail',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SubjectsRoute = SubjectsRouteImport.update({
-  id: '/subjects',
-  path: '/subjects',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RevisionRoute = RevisionRouteImport.update({
-  id: '/revision',
-  path: '/revision',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PlanRoute = PlanRouteImport.update({
-  id: '/plan',
-  path: '/plan',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CloneRoute = CloneRouteImport.update({
-  id: '/clone',
-  path: '/clone',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ChatRoute = ChatRouteImport.update({
-  id: '/chat',
-  path: '/chat',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminRoute = AdminRouteImport.update({
-  id: '/admin',
-  path: '/admin',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -66,9 +36,59 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChatRoute = ChatRouteImport.update({
+  id: '/chat',
+  path: '/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CloneRoute = CloneRouteImport.update({
+  id: '/clone',
+  path: '/clone',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlanRoute = PlanRouteImport.update({
+  id: '/plan',
+  path: '/plan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RevisionRoute = RevisionRouteImport.update({
+  id: '/revision',
+  path: '/revision',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SubjectsRoute = SubjectsRouteImport.update({
+  id: '/subjects',
+  path: '/subjects',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SuhailRoute = SuhailRouteImport.update({
+  id: '/suhail',
+  path: '/suhail',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiSpeakRoute = ApiSpeakRouteImport.update({
+  id: '/api/speak',
+  path: '/api/speak',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiSuhailRoute = ApiSuhailRouteImport.update({
+  id: '/api/suhail',
+  path: '/api/suhail',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiTranscribeRoute = ApiTranscribeRouteImport.update({
+  id: '/api/transcribe',
+  path: '/api/transcribe',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SubjectsIndexRoute = SubjectsIndexRouteImport.update({
@@ -80,26 +100,6 @@ const SubjectsSlugRoute = SubjectsSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => SubjectsRoute,
-} as any)
-const ApiTranscribeRoute = ApiTranscribeRouteImport.update({
-  id: '/api/transcribe',
-  path: '/api/transcribe',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiSuhailRoute = ApiSuhailRouteImport.update({
-  id: '/api/suhail',
-  path: '/api/suhail',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiSpeakRoute = ApiSpeakRouteImport.update({
-  id: '/api/speak',
-  path: '/api/speak',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiChatRoute = ApiChatRouteImport.update({
-  id: '/api/chat',
-  path: '/api/chat',
-  getParentRoute: () => rootRouteImport,
 } as any)
 const TopicSubjectUnitTopicRoute = TopicSubjectUnitTopicRouteImport.update({
   id: '/topic/$subject/$unit/$topic',
@@ -236,53 +236,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/suhail': {
-      id: '/suhail'
-      path: '/suhail'
-      fullPath: '/suhail'
-      preLoaderRoute: typeof SuhailRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/subjects': {
-      id: '/subjects'
-      path: '/subjects'
-      fullPath: '/subjects'
-      preLoaderRoute: typeof SubjectsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/revision': {
-      id: '/revision'
-      path: '/revision'
-      fullPath: '/revision'
-      preLoaderRoute: typeof RevisionRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/plan': {
-      id: '/plan'
-      path: '/plan'
-      fullPath: '/plan'
-      preLoaderRoute: typeof PlanRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/clone': {
-      id: '/clone'
-      path: '/clone'
-      fullPath: '/clone'
-      preLoaderRoute: typeof CloneRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/chat': {
-      id: '/chat'
-      path: '/chat'
-      fullPath: '/chat'
-      preLoaderRoute: typeof ChatRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin': {
-      id: '/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AdminRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -292,11 +250,81 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/chat': {
+      id: '/chat'
+      path: '/chat'
+      fullPath: '/chat'
+      preLoaderRoute: typeof ChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/clone': {
+      id: '/clone'
+      path: '/clone'
+      fullPath: '/clone'
+      preLoaderRoute: typeof CloneRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/plan': {
+      id: '/plan'
+      path: '/plan'
+      fullPath: '/plan'
+      preLoaderRoute: typeof PlanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/revision': {
+      id: '/revision'
+      path: '/revision'
+      fullPath: '/revision'
+      preLoaderRoute: typeof RevisionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/subjects': {
+      id: '/subjects'
+      path: '/subjects'
+      fullPath: '/subjects'
+      preLoaderRoute: typeof SubjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/suhail': {
+      id: '/suhail'
+      path: '/suhail'
+      fullPath: '/suhail'
+      preLoaderRoute: typeof SuhailRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/speak': {
+      id: '/api/speak'
+      path: '/api/speak'
+      fullPath: '/api/speak'
+      preLoaderRoute: typeof ApiSpeakRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/suhail': {
+      id: '/api/suhail'
+      path: '/api/suhail'
+      fullPath: '/api/suhail'
+      preLoaderRoute: typeof ApiSuhailRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/transcribe': {
+      id: '/api/transcribe'
+      path: '/api/transcribe'
+      fullPath: '/api/transcribe'
+      preLoaderRoute: typeof ApiTranscribeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/subjects/': {
@@ -312,34 +340,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/subjects/$slug'
       preLoaderRoute: typeof SubjectsSlugRouteImport
       parentRoute: typeof SubjectsRoute
-    }
-    '/api/transcribe': {
-      id: '/api/transcribe'
-      path: '/api/transcribe'
-      fullPath: '/api/transcribe'
-      preLoaderRoute: typeof ApiTranscribeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/suhail': {
-      id: '/api/suhail'
-      path: '/api/suhail'
-      fullPath: '/api/suhail'
-      preLoaderRoute: typeof ApiSuhailRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/speak': {
-      id: '/api/speak'
-      path: '/api/speak'
-      fullPath: '/api/speak'
-      preLoaderRoute: typeof ApiSpeakRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/chat': {
-      id: '/api/chat'
-      path: '/api/chat'
-      fullPath: '/api/chat'
-      preLoaderRoute: typeof ApiChatRouteImport
-      parentRoute: typeof rootRouteImport
     }
     '/topic/$subject/$unit/$topic': {
       id: '/topic/$subject/$unit/$topic'
